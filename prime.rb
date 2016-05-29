@@ -10,26 +10,19 @@
 
 #                         Prime Test
 
-# Pseudocode:
-# Input: a positive integer(n)
-# Output: A boolean value for whether n is a prime number
-#
-# -take the positive integer, modulus it by every number between itself and 1
-# -if for any of those moduluses == 0 then return false, if not return true
-#
-
+# If integer is prime, integer is returned, if not it's largest factor is returned
 def prime?(integer)
 n = integer
 if n < 1 then raise ArgumentError.new("Positive integers only")
 end
-
+largest_factor = nil
 for i in 2..(n/2)
 	if (n % i) == 0
-		return false
+		largest_factor = i
 	end
 end
 
-true 
+largest_factor ||= n 
 end
 
 # time = Time.now 
@@ -54,20 +47,19 @@ def factorial(n)
 	factorial_sum
 end
 
-def build_primes
-	n = 1
-	loop do
-		n = factorial(n) + 1
-		p n 
-	end
-
+def build_primes(prime_number)
+	p_fact = factorial(prime_number)
+	next_prime = prime?(p_fact + 1)
+	p next_prime
+	build_primes(next_prime)
 end
 
-build_primes
-# p gen_random_prime
-# p factorial(100)
-# p gen_random_prime
+# build_primes
 
+p build_primes(2)
+# p prime?(5041)
+
+# p factorial(71)
 
 # 					GRAVEYARD
 
